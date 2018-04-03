@@ -78,6 +78,9 @@ void MainActivity::onCreate() {
 		ostr << progress;
 		volumeText->setText(ostr.str());
 	});
+
+	piSerial = new UartSerial("/dev/pi_uart");
+	piSerial->writeLine("{\"isPlaying\":true,\"currentPlaying\":\"5aab770ab359b46a78887497\",\"currentStation\":{\"id\":\"5aab770ab359b46a78887497\",\"name\":\"CelePods5\",\"country\":{\"code\":\"CA\",\"name\":\"Canada\",\"latitude\":45.3168,\"longitude\":-73.8659},\"streamUrl\":\"http://144.217.192.113:8120/mount\",\"genre\":\"News\",\"createdAt\":1521186570,\"updatedAt\":1521186570},\"currentStreamUrl\":\"http://144.217.192.113:8120/mount\",\"currentSong\":{\"name\":\"A\",\"title\":\"HA\",\"imageUrl\":\"\"}}");
 }
 
 void MainActivity::onDestroy() {

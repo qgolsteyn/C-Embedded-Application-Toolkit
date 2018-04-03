@@ -26,12 +26,13 @@ void Context::detachApplication() {
 	M_Unstack();
 }
 
-//Serial* Context::getSerial() {
-//	M_Stack();
-//	M_Assert(application != NULL, "Application is not attached! Have you called attachApplication()?");
-//	M_Unstack();
-//	return application->serial;
-//}
+void Context::attachSerial(UartSerial* serial) {
+	application->attachSerial(serial);
+}
+
+void Context::detachSerial(UartSerial* serial) {
+	application->detachSerial(serial);
+}
 
 void Context::startActivity(Activity* activity) {
 	M_Stack();

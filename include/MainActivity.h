@@ -13,7 +13,7 @@ using namespace std;
 #include "TextView.h"
 
 class MainActivity : public Activity {
-
+	UartSerial* piSerial;
 public:
   MainActivity();
   ~MainActivity();

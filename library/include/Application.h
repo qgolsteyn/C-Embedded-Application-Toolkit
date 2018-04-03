@@ -6,6 +6,7 @@
 #include "List.h"
 #include "Touchscreen.h"
 #include "Colors.h"
+#include "UartSerial.h"
 
 
 #define XRES 770
@@ -27,12 +28,17 @@ class Application {
 
   Renderer* renderer;
 
+  List serialList;
+
 public:
   Application();
   ~Application();
   void startApplication(Activity* activity);
   void startActivity(Activity* activity);
 private:
+  void attachSerial(UartSerial* serial);
+  void detachSerial(UartSerial* serial);
+  void handleSerial();
   void stopCurrentActivity();
   void superLoop();
 };
@@ -45,7 +51,8 @@ public:
   void attachApplication(Application* app);
   void detachApplication();
 protected:
-  //Serial* getSerial();
+  void attachSerial(UartSerial* serial);
+  void detachSerial(UartSerial* serial);
   void startActivity(Activity* activity);
 private:
 };

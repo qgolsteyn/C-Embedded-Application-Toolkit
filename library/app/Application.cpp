@@ -71,12 +71,36 @@ void Application::stopCurrentActivity() {
 	M_Unstack();
 }
 
+void Application::attachSerial(UartSerial* serial) {
+	M_Stack();
+	serialList.insertEnd((void*) serial);
+	M_Unstack();
+}
+
+void Application::detachSerial(UartSerial* serial) {
+	M_Stack();
+	serialList.deleteItem((void*) serial);
+	M_Unstack();
+}
+
+void Application::handleSerial() {
+	M_Stack();
+	Iterator* iterator = serialList.getIteratorStart();
+	UartSerial* serial = (UartSerial*) iterator->next();
+	while(serial != 0) {
+		serial->checkListener();
+	}
+	delete iterator;
+	M_Unstack();
+}
+
 void Application::superLoop() {
 	M_Stack();
 	Log_Low("Application", "Starting SuperLoop");
 	while(1) {
 		usleep(30);
 		renderer->handleTouch();
+		handleSerial();
 		//renderer->animate();
 		renderer->render();
 	}
